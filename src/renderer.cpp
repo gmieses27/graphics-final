@@ -6,10 +6,10 @@
 static Renderer* g_renderer = nullptr;
 
 Renderer::Renderer() 
-    : window_(nullptr), width_(1280), height_(720),
-      cameraPos_(0.0f, 0.0f, 10.0f), cameraTarget_(0.0f, 0.0f, 0.0f),
+        : window_(nullptr), width_(1280), height_(720),
+            cameraPos_(0.0f, 0.0f, 6.0f), cameraTarget_(0.0f, 0.0f, 0.0f),
       cameraUp_(0.0f, 1.0f, 0.0f), lastMouseX_(0.0), lastMouseY_(0.0),
-      mousePressed_(false), cameraDistance(10.0f), 
+            mousePressed_(false), cameraDistance(6.0f), 
       cameraRotationX(20.0f), cameraRotationY(45.0f), autoRotate(false) {
     g_renderer = this;
 }
@@ -86,7 +86,7 @@ void Renderer::updateCamera(float deltaTime) {
 }
 
 void Renderer::resetCamera() {
-    cameraDistance = 10.0f;
+    cameraDistance = 6.0f;
     cameraRotationX = 20.0f;
     cameraRotationY = 45.0f;
     cameraTarget_ = glm::vec3(0.0f, 0.0f, 0.0f);

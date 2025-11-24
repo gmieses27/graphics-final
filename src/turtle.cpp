@@ -1,11 +1,13 @@
 #include "Turtle.h"
 #include <cmath>
+#include <cfloat>
 #include <glm/gtc/constants.hpp>
 
 Turtle::Turtle() 
-    : angle_(25.0f), stepLength_(1.0f), stepWidth_(0.1f),
-      lengthScale_(0.9f), widthScale_(0.7f), tropism_(0.0f, -0.1f, 0.0f),
-      mode3D_(false), minBounds_(FLT_MAX), maxBounds_(-FLT_MAX) {
+        : angle_(25.0f), stepLength_(1.0f), stepWidth_(0.1f),
+            lengthScale_(0.9f), widthScale_(0.7f), tropism_(0.0f, -0.1f, 0.0f),
+            mode3D_(false), minBounds_(FLT_MAX), maxBounds_(-FLT_MAX),
+            lowestPoint_(0.0f), lowestY_(FLT_MAX) {
     reset();
 }
 
@@ -21,6 +23,9 @@ void Turtle::reset() {
     leaves_.clear();
     minBounds_ = glm::vec3(FLT_MAX);
     maxBounds_ = glm::vec3(-FLT_MAX);
+    lowestPoint_ = state_.position;
+    lowestY_ = FLT_MAX;
+    updateBounds(state_.position);
 }
 
 void Turtle::interpret(const std::string& lsystemString) {
@@ -205,6 +210,10 @@ void Turtle::scaleWidth(float factor) {
 void Turtle::updateBounds(const glm::vec3& point) {
     minBounds_ = glm::min(minBounds_, point);
     maxBounds_ = glm::max(maxBounds_, point);
+    if (point.y < lowestY_) {
+        lowestY_ = point.y;
+        lowestPoint_ = point;
+    }
 }
 
 void Turtle::applyTropism() {

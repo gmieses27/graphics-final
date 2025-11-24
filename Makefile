@@ -1,6 +1,7 @@
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I./include -I./external/imgui -I./external/imgui/backends -I/opt/homebrew/include
+CXXFLAGS += -w
 LDFLAGS = -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo -L/opt/homebrew/lib
 LIBS = -lglfw
 

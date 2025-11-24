@@ -79,6 +79,7 @@ public:
     glm::vec3 getMinBounds() const { return minBounds_; }
     glm::vec3 getMaxBounds() const { return maxBounds_; }
     glm::vec3 getCenter() const { return (minBounds_ + maxBounds_) * 0.5f; }
+    glm::vec3 getRootPosition() const { return lowestPoint_; }
     
 private:
     // Turtle state
@@ -102,6 +103,8 @@ private:
     // Bounds
     glm::vec3 minBounds_;
     glm::vec3 maxBounds_;
+    glm::vec3 lowestPoint_;
+    float lowestY_;
     
     // Turtle commands
     void moveForward();
